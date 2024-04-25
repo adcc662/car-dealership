@@ -10,8 +10,14 @@ import {
   Post,
 } from '@nestjs/common';
 import { CarsService } from './cars.service';
+import { CreateCarDto } from './dto/create-car.dto';
 
 @Controller('cars')
+// @UsePipes(ValidationPipe)
+/*Why have we put the validation pipe on this place?
+Because we have to do the validation for all methods or functions but
+we have to do it globally to it doesn't make this validation in every controller
+The global configuration is in main.ts*/
 export class CarsController {
   constructor(private readonly carsService: CarsService) {}
 
@@ -27,8 +33,8 @@ export class CarsController {
   }
 
   @Post()
-  createCar(@Body() body: any) {
-    return body;
+  createCar(@Body() createCarDto: CreateCarDto) {
+    return this.carsService.create(createCarDto);
   }
 
   @Patch(':id')
