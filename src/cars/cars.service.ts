@@ -72,6 +72,7 @@ create({ model, brand }*/
   }
 
   delete(id: string) {
+    /*This endpoint is to delete a car*/
     const car = this.findOneByid(id);
     this.cars = this.cars.filter((car) => car.id !== id);
   }
